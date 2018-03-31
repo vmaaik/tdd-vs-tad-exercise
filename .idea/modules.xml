@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tdd-vs-tad-exercise.iml" filepath="$PROJECT_DIR$/tdd-vs-tad-exercise.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tdd-vs-tad-exercise_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tdd-vs-tad-exercise_main.iml" group="tdd-vs-tad-exercise" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tdd-vs-tad-exercise_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tdd-vs-tad-exercise_test.iml" group="tdd-vs-tad-exercise" />
+    </modules>
+  </component>
+</project>
