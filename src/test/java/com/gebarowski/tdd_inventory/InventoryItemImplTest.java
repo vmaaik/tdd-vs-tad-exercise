@@ -16,26 +16,26 @@ public class InventoryItemImplTest {
 
     @Test
     public void create() {
-        final InventoryItem inventoryItem = InventoryItemImpl.of("Item1", 12.50);
+        final var inventoryItem = InventoryItemImpl.of("Item1", 12.51);
         assertAll(
                 () -> assertThat(inventoryItem.getName()).isEqualTo("Item1"),
-                () -> assertThat(inventoryItem.getWeight()).isEqualTo(12.50)
+                () -> assertThat(inventoryItem.getWeight()).isEqualTo(12.51)
         );
     }
 
     @Test
     public void createWithNullName() {
-        assertThrows(IllegalArgumentException.class, () -> InventoryItemImpl.of(null, 12.50));
+        assertThrows(IllegalArgumentException.class, () -> InventoryItemImpl.of(null, 12.51));
     }
 
     @Test
     public void createWithEmptyName() {
-        assertThrows(IllegalArgumentException.class, () -> InventoryItemImpl.of("", 13.40));
+        assertThrows(IllegalArgumentException.class, () -> InventoryItemImpl.of("", 13.41));
     }
 
     @Test
     public void creativeWithNegativeWeight() {
-        assertThrows(IllegalArgumentException.class, () -> InventoryItemImpl.of("Item2", -10.40));
+        assertThrows(IllegalArgumentException.class, () -> InventoryItemImpl.of("Item2", -10.41));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class InventoryItemImplTest {
 
     @Test
     public void stringification() {
-        final InventoryItem item = InventoryItemImpl.of("Item1", 12.90);
-        assertThat(item.toString()).isEqualTo("Item1, 12.90");
+        final var item = InventoryItemImpl.of("Item1", 12.91);
+        assertThat(item.toString()).isEqualTo("Item1, 12.91");
     }
 }

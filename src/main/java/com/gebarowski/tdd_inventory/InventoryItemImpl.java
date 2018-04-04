@@ -1,5 +1,9 @@
 package com.gebarowski.tdd_inventory;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 
 /**
@@ -7,7 +11,15 @@ import java.io.Serializable;
  */
 public class InventoryItemImpl implements InventoryItem, Serializable {
 
+    @Nonnull
+    private final String name;
+    private final double weight;
+
     private InventoryItemImpl(final String name, final double weight) {
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(name), "No item name specified");
+        Preconditions.checkArgument(weight >= 0.0, "Item weight has to be non-negative");
+        this.name = name;
+        this.weight = weight;
     }
 
     public static InventoryItem of(final String name, final double weight) {
@@ -16,26 +28,33 @@ public class InventoryItemImpl implements InventoryItem, Serializable {
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException();
+        return name;
     }
 
     @Override
-    public int hashCode() {
-        throw new UnsupportedOperationException();
+    public final int hashCode() {
+        return name.hashCode() + Double.hashCode(weight);
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        throw new UnsupportedOperationException();
+    public final boolean equals(final Object rightSide) {
+        if (!(rightSide instanceof InventoryItem)) {
+            return false;
+        }
+        final var that = (InventoryItem) rightSide;
+        return (this == that) || name.equals(that.getName()) && Double.compare(weight, that.getWeight()) == 0;
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        return new StringBuilder(name)
+                .append(", ")
+                .append(weight)
+                .toString();
     }
 
     @Override
     public double getWeight() {
-        throw new UnsupportedOperationException();
+        return weight;
     }
 }

@@ -9,6 +9,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
     testImplementation(
             'org.junit.jupiter:junit-jupiter-api:5.1.0'
@@ -19,6 +20,8 @@ dependencies {
 
     testCompile group: 'nl.jqno.equalsverifier', name: 'equalsverifier', version: '2.4.5'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.9.1'
+    compile group: 'com.google.guava', name: 'guava', version: '24.1-jre'
+    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 }
 
 
