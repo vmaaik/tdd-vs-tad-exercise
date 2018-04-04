@@ -1,4 +1,4 @@
-package com.gebarowski.tdd_inventory;
+package com.gebarowski.tdd_inventory_item;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;

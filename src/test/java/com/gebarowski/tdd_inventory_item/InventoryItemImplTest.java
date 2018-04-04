@@ -1,4 +1,4 @@
-package com.gebarowski.tdd_inventory;
+package com.gebarowski.tdd_inventory_item;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

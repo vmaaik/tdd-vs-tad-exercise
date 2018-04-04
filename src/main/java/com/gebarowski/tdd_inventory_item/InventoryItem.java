@@ -1,4 +1,4 @@
-package com.gebarowski.tdd_inventory;
+package com.gebarowski.tdd_inventory_item;
 
 /**
  * Created by Michał Gębarowski on 31/03/2018
