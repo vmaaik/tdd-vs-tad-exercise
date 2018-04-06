@@ -8,14 +8,21 @@ import java.util.Iterator;
  * Created by Michał Gębarowski on 04/04/2018
  */
 public class InventoryImpl implements Inventory {
+
+    private double limit;
+
+    public static Inventory create() {
+        return new InventoryImpl();
+    }
+
     @Override
     public void setWeightLimit(double limit) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void setCountLimit(int limit) {
-        throw new UnsupportedOperationException();
+    public void setCountLimit(final int limit) {
+        this.limit = limit;
     }
 
     @Override
