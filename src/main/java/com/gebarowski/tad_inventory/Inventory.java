@@ -8,6 +8,8 @@ import com.gebarowski.tdd_inventory_item.InventoryItem;
 public interface Inventory extends Iterable<InventoryItem> {
     void setWeightLimit(double limit);
 
+    int getCountLimit();
+
     void setCountLimit(int limit);
 
     void add(InventoryItem inventoryItem);

@@ -2,14 +2,17 @@ package com.gebarowski.tad_inventory;
 
 import com.gebarowski.tdd_inventory_item.InventoryItem;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Michał Gębarowski on 04/04/2018
  */
 public class InventoryImpl implements Inventory {
 
-    private double limit;
+    private final List<InventoryItem> items = new ArrayList<>();
+    private int limit;
 
     public static Inventory create() {
         return new InventoryImpl();
@@ -21,13 +24,20 @@ public class InventoryImpl implements Inventory {
     }
 
     @Override
+    public int getCountLimit() {
+        return limit;
+    }
+
+    @Override
     public void setCountLimit(final int limit) {
+        Preconditions.checkArgument(limit >= 0, "Count limit can not be negative");
+        Preconditions.checkArgument(limit >= items.size(), "Limit too low");
         this.limit = limit;
     }
 
     @Override
     public void add(InventoryItem inventoryItem) {
-        throw new UnsupportedOperationException();
+        items.add(inventoryItem);
     }
 
     @Override
