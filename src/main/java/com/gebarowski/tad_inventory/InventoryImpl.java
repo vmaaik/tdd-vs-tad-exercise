@@ -1,6 +1,7 @@
 package com.gebarowski.tad_inventory;
 
 import com.gebarowski.tdd_inventory_item.InventoryItem;
+import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,27 +13,32 @@ import java.util.List;
 public class InventoryImpl implements Inventory {
 
     private final List<InventoryItem> items = new ArrayList<>();
-    private int limit;
+    private int countLimit;
+    private double weightLimit;
 
     public static Inventory create() {
         return new InventoryImpl();
     }
 
+    public double getWeightLimit() {
+        return weightLimit;
+    }
+
     @Override
-    public void setWeightLimit(double limit) {
-        throw new UnsupportedOperationException();
+    public void setWeightLimit(double weightLimit) {
+        this.weightLimit = weightLimit;
     }
 
     @Override
     public int getCountLimit() {
-        return limit;
+        return countLimit;
     }
 
     @Override
     public void setCountLimit(final int limit) {
-        Preconditions.checkArgument(limit >= 0, "Count limit can not be negative");
+        Preconditions.checkArgument(limit >= 0, "Count countLimit can not be negative");
         Preconditions.checkArgument(limit >= items.size(), "Limit too low");
-        this.limit = limit;
+        this.countLimit = limit;
     }
 
     @Override

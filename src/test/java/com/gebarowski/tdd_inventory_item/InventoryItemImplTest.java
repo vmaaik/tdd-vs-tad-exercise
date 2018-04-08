@@ -1,5 +1,6 @@
 package com.gebarowski.tdd_inventory_item;
 
+import com.gebarowski.tad_inventory.Inventory;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ public class InventoryItemImplTest {
 
     @Test
     public void create() {
-        final var inventoryItem = InventoryItemImpl.of("Item1", 12.51);
+        final InventoryItem inventoryItem = InventoryItemImpl.of("Item1", 12.51);
         assertAll(
                 () -> assertThat(inventoryItem.getName()).isEqualTo("Item1"),
                 () -> assertThat(inventoryItem.getWeight()).isEqualTo(12.51)
@@ -45,7 +46,7 @@ public class InventoryItemImplTest {
 
     @Test
     public void stringification() {
-        final var item = InventoryItemImpl.of("Item1", 12.91);
+        final InventoryItem item = InventoryItemImpl.of("Item1", 12.91);
         assertThat(item.toString()).isEqualTo("Item1, 12.91");
     }
 }
