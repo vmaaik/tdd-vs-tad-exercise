@@ -26,6 +26,8 @@ public class InventoryImpl implements Inventory {
 
     @Override
     public void setWeightLimit(double weightLimit) {
+        Preconditions.checkArgument(weightLimit >= 0, "Weight limit can not be negative");
+        Preconditions.checkArgument(weightLimit >= getTotalWeight(), "Weight limit too low");
         this.weightLimit = weightLimit;
     }
 
@@ -36,8 +38,8 @@ public class InventoryImpl implements Inventory {
 
     @Override
     public void setCountLimit(final int limit) {
-        Preconditions.checkArgument(limit >= 0, "Count countLimit can not be negative");
-        Preconditions.checkArgument(limit >= items.size(), "Limit too low");
+        Preconditions.checkArgument(limit >= 0, "Count limit can not be negative");
+        Preconditions.checkArgument(limit >= items.size(), "Count too low");
         this.countLimit = limit;
     }
 
@@ -63,7 +65,9 @@ public class InventoryImpl implements Inventory {
 
     @Override
     public double getTotalWeight() {
-        throw new UnsupportedOperationException();
+        return items.stream()
+                .mapToDouble(item -> item.getWeight())
+                .sum();
     }
 
     @Override

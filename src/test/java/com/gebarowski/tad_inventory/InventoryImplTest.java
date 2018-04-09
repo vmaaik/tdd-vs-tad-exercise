@@ -1,6 +1,7 @@
 package com.gebarowski.tad_inventory;
 
 import com.gebarowski.tdd_inventory_item.InventoryItemImpl;
+import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -86,4 +87,16 @@ class InventoryImplTest {
         assertThrows(IllegalArgumentException.class, () -> inventory.setWeightLimit(1.0));
     }
 
+    @Test
+    public void emptyInventoryHasToWeight() {
+        assertThat(inventory.getTotalWeight()).isZero();
+    }
+
+    @Test
+    public void getTotalWeight() {
+        inventory.setWeightLimit(5.0);
+        inventory.add(InventoryItemImpl.of("Item1", 1.1));
+        inventory.add(InventoryItemImpl.of("Item2", 3.2));
+        assertThat(inventory.getTotalWeight()).isEqualTo(4.3, Offset.offset(0.01));
+    }
 }
