@@ -160,5 +160,43 @@ class InventoryImplTest {
         assertThat(inventory.get(0)).isSameAs(item);
     }
 
+    @Test
+    public void iterator() {
+        inventory.setCountLimit(2);
+        inventory.setWeightLimit(10.0);
+        final InventoryItem item = InventoryItemImpl.of("Item1", 1.1);
+        final InventoryItem item1 = InventoryItemImpl.of("Item2", 1.1);
+        inventory.add(item);
+        inventory.add(item1);
+        assertThat(inventory).containsOnly(item, item1);
+    }
+
+    @Test
+    public void removeNull() {
+        assertThrows(IllegalArgumentException.class, () -> inventory.remove(null));
+    }
+
+    @Test
+    public void removeNonExistent() {
+        inventory.setCountLimit(2);
+        inventory.setWeightLimit(10.0);
+        final InventoryItem item = InventoryItemImpl.of("Item1", 1.1);
+        final InventoryItem item1 = InventoryItemImpl.of("Item2", 1.1);
+        inventory.add(item);
+        assertThrows(IllegalArgumentException.class, () -> inventory.remove(item1));
+    }
+
+    @Test
+    public void remove() {
+        inventory.setCountLimit(2);
+        inventory.setWeightLimit(10.0);
+        final InventoryItem item = InventoryItemImpl.of("Item1", 1.1);
+        final InventoryItem item1 = InventoryItemImpl.of("Item2", 1.1);
+        inventory.add(item);
+        inventory.add(item1);
+        inventory.remove(item);
+        assertThat(inventory).containsOnly(item1);
+    }
+
 
 }

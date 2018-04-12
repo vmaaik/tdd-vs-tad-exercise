@@ -52,8 +52,9 @@ public class InventoryImpl implements Inventory {
     }
 
     @Override
-    public void remove(InventoryItem inventoryItem) {
-        throw new UnsupportedOperationException();
+    public void remove(InventoryItem item) {
+        Preconditions.checkArgument(items.contains(item), "No such element in the inventory");
+        items.remove(item);
     }
 
     @Override
@@ -75,6 +76,6 @@ public class InventoryImpl implements Inventory {
 
     @Override
     public Iterator<InventoryItem> iterator() {
-        throw new UnsupportedOperationException();
+        return items.iterator();
     }
 }
