@@ -1,4 +1,4 @@
-package com.gebarowski.tdd_inventory;
+package com.gebarowski.tdd_inventory_item;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -41,7 +41,7 @@ public class InventoryItemImpl implements InventoryItem, Serializable {
         if (!(rightSide instanceof InventoryItem)) {
             return false;
         }
-        final var that = (InventoryItem) rightSide;
+        final InventoryItem that = (InventoryItem) rightSide;
         return (this == that) || name.equals(that.getName()) && Double.compare(weight, that.getWeight()) == 0;
     }
 
