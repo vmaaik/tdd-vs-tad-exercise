@@ -58,7 +58,7 @@ public class InventoryImpl implements Inventory {
 
     @Override
     public InventoryItem get(int index) {
-        throw new UnsupportedOperationException();
+        return items.get(index);
     }
 
     @Override

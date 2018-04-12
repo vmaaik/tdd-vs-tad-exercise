@@ -1,5 +1,6 @@
 package com.gebarowski.tad_inventory;
 
+import com.gebarowski.tdd_inventory_item.InventoryItem;
 import com.gebarowski.tdd_inventory_item.InventoryItemImpl;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeEach;
@@ -131,4 +132,33 @@ class InventoryImplTest {
         inventory.add(InventoryItemImpl.of("Item2", 1.5));
         assertThat(inventory.size()).isEqualTo(2);
     }
+
+    @Test
+    public void getNegatve() {
+        assertThrows(IndexOutOfBoundsException.class, () -> inventory.get(-1));
+    }
+
+    @Test
+    public void getFromEmpty() {
+        assertThrows(IndexOutOfBoundsException.class, () -> inventory.get(0));
+    }
+
+    @Test
+    public void getExceedingEnd() {
+        inventory.setCountLimit(2);
+        inventory.setWeightLimit(10.0);
+        inventory.add(InventoryItemImpl.of("Item1", 1.1));
+        assertThrows(IndexOutOfBoundsException.class, () -> inventory.get(1));
+    }
+
+    @Test
+    public void get() {
+        inventory.setCountLimit(2);
+        inventory.setWeightLimit(10.0);
+        final InventoryItem item = InventoryItemImpl.of("Item1", 1.1);
+        inventory.add(item);
+        assertThat(inventory.get(0)).isSameAs(item);
+    }
+
+
 }
