@@ -44,8 +44,11 @@ public class InventoryImpl implements Inventory {
     }
 
     @Override
-    public void add(InventoryItem inventoryItem) {
-        items.add(inventoryItem);
+    public void add(InventoryItem item) {
+        Preconditions.checkNotNull(item, "Item can not be null");
+        Preconditions.checkState(size() < getCountLimit(), "Cannot exceed item count limit");
+        Preconditions.checkState(getTotalWeight() + item.getWeight() <= getWeightLimit(), "Cannot exceed  total item weight limit");
+        items.add(item);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class InventoryImpl implements Inventory {
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return items.size();
     }
 
     @Override

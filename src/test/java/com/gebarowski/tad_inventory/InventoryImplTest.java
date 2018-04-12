@@ -20,7 +20,6 @@ class InventoryImplTest {
         inventory = InventoryImpl.create();
     }
 
-
     @Test
     public void setPositiveCountLimit() {
         inventory.setCountLimit(5);
@@ -41,6 +40,7 @@ class InventoryImplTest {
     @Test
     public void lowerCountLimit() {
         inventory.setCountLimit(3);
+        inventory.setWeightLimit(6.0);
         inventory.add(InventoryItemImpl.of("Item1", 1.0));
         inventory.add(InventoryItemImpl.of("Item2", 3.0));
         inventory.setCountLimit(2);
@@ -49,6 +49,7 @@ class InventoryImplTest {
     @Test
     public void countLimitTooLow() {
         inventory.setCountLimit(3);
+        inventory.setWeightLimit(5.0);
         inventory.add(InventoryItemImpl.of("Item1", 1.0));
         inventory.add(InventoryItemImpl.of("Item2", 3.0));
         assertThrows(IllegalArgumentException.class, () -> inventory.setCountLimit(1));
@@ -74,6 +75,7 @@ class InventoryImplTest {
     @Test
     public void lowerWeightLimit() {
         inventory.setWeightLimit(5.0);
+        inventory.setCountLimit(5);
         inventory.add(InventoryItemImpl.of("Item1", 1.0));
         inventory.add(InventoryItemImpl.of("Item2", 3.0));
         inventory.setWeightLimit(4.0);
@@ -82,6 +84,7 @@ class InventoryImplTest {
     @Test
     public void weightLimitTooLow() {
         inventory.setWeightLimit(5.0);
+        inventory.setCountLimit(6);
         inventory.add(InventoryItemImpl.of("Item1", 1.0));
         inventory.add(InventoryItemImpl.of("Item2", 3.0));
         assertThrows(IllegalArgumentException.class, () -> inventory.setWeightLimit(1.0));
@@ -95,8 +98,37 @@ class InventoryImplTest {
     @Test
     public void getTotalWeight() {
         inventory.setWeightLimit(5.0);
+        inventory.setCountLimit(5);
         inventory.add(InventoryItemImpl.of("Item1", 1.1));
         inventory.add(InventoryItemImpl.of("Item2", 3.2));
         assertThat(inventory.getTotalWeight()).isEqualTo(4.3, Offset.offset(0.01));
+    }
+
+    @Test
+    public void addNull() {
+        assertThrows(NullPointerException.class, () -> inventory.add(null));
+    }
+
+    @Test
+    public void addExceedingCountLimit() {
+        inventory.setCountLimit(0);
+        inventory.setWeightLimit(3.0);
+        assertThrows(IllegalStateException.class, () -> inventory.add(InventoryItemImpl.of("Item1", 1.1)));
+    }
+
+    @Test
+    public void addExceedingWeightLimit() {
+        inventory.setWeightLimit(0.9);
+        inventory.setCountLimit(9);
+        assertThrows(IllegalStateException.class, () -> inventory.add(InventoryItemImpl.of("Item1", 1.1)));
+    }
+
+    @Test
+    public void add() {
+        inventory.setCountLimit(10);
+        inventory.setWeightLimit(2.9);
+        inventory.add(InventoryItemImpl.of("Item1", 1.1));
+        inventory.add(InventoryItemImpl.of("Item2", 1.5));
+        assertThat(inventory.size()).isEqualTo(2);
     }
 }
